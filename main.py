@@ -1,15 +1,20 @@
-# shouldn't stay for long, was just testing my bfs logic
-
+# shouldn't stay for long, was just testing my bfs/ids logic
 import helperfn
 import bfs
+import ids
 
-initial_state = (8, 6, 7, 2, 5, 4, 3, 0, 1)
+initial_state = (1, 2, 3, 4, 0, 5, 6, 7, 8)
 
 goal_state = (0, 1, 2, 3, 4, 5, 6, 7, 8)
 
+# if helperfn.issolvable(initial_state):
+#   result = bfs.bfs(initial_state, goal_state)
+#  helperfn.result_bfs(result)
+# else:
+#   print("unsolvable")
+
 if helperfn.issolvable(initial_state):
-    result = bfs.bfs(initial_state, goal_state)
-    print("Expanded nodes:", result["node_count"])
-    print("Search depth:", result["depth"])
+    result = ids.ids(initial_state, goal_state)
+    helperfn.result(result)
 else:
     print("unsolvable")

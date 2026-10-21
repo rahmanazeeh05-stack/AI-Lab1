@@ -43,3 +43,17 @@ def generate_neighbors(state):
     if x not in (2, 5, 8):  # can move right
         neighbors.append(child(state, x, x + 1))
     return neighbors
+
+
+def printing_path(path):
+    for state in path:
+        for r in range(0, 9, 3):
+            print(*state[r : r + 3])
+        print()
+
+
+def result(result: dict):
+    print("runtime", result["totaltime"])
+    print("Expanded nodes:", result["node_count"])
+    print("Search depth:", result["depth"])
+    printing_path(result["path"])
