@@ -65,11 +65,6 @@ def main():
     print(end - start)
 
 
-def new_func():
-    """
-
-    """
-
 if __name__ == "__main__":
     # To prevent the stack overflow.
     # A second thread is started to operate with 512MB, and the main thread sleeps
