@@ -54,7 +54,7 @@ def printing_path(path):
 
 def result(result: dict):
     print("runtime: ", result["totaltime"], "seconds")
-    print("path cost: ",result["pathcost"])
+    print("path cost: ", result["pathcost"])
     print("Search depth:", result["depth"])
     print("Expanded nodes:", result["node_count"])
     printing_path(result["path"])

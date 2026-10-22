@@ -3,9 +3,6 @@ import helperfn
 import dfs
 
 
-
-
-
 def ids(initial_state, goal):
     start = time.perf_counter()
     limit = 0
@@ -14,20 +11,16 @@ def ids(initial_state, goal):
         visited = {}
         path = []
 
-        found= dfs.dfs(initial_state,0,path,nodes,visited,goal,limit)
-        totalnodes=len(nodes)
+        found = dfs.dfs(initial_state, 0, path, nodes, visited, goal, limit)
+        totalnodes = len(nodes)
         if found:
-            path.reverse
+            path.reverse()
             return {
                 "path": path,
-                "pathcost": len(path)-1,
+                "pathcost": len(path) - 1,
                 "depth": len(path) - 1,
                 "totaltime": time.perf_counter() - start,
                 "node_count": totalnodes,
-                
             }
-        
+
         limit += 1
-
-
-
