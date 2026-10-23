@@ -3,14 +3,15 @@ import helperfn
 import heapq
 
 
-def astar(
+def astar_logic(
     initial_state: tuple[int, ...],
     mode: bool,
+    path: list[tuple[int, ...]],
+    node_info: dict,
     goal: tuple[int, ...] = (0, 1, 2, 3, 4, 5, 6, 7, 8),
-) -> tuple[list[tuple[int, ...]], list[tuple[int, ...]]]:
-    node_info = {}
+    nodes_expanded: int = 0,
+) -> tuple[int, int]:
 
-    nodes_expanded = []
     h = heuristic(initial_state, mode)
 
     node_info[initial_state] = {"g": 0, "parent": None}
@@ -18,16 +19,18 @@ def astar(
     frontier = []
 
     heapq.heappush(frontier, (h, 0, initial_state))
+    max_depth = 0
 
     while frontier:
 
         _, g, current_state = heapq.heappop(frontier)
+        max_depth = max(g, max_depth)
         if (
             g > node_info[current_state]["g"]
         ):  # Take alawys the smaller and ignore the bigger
             # You can compere the f but for the same state the h is constant so the g has all the information about the state
             continue
-        nodes_expanded.append(current_state)
+        nodes_expanded += 1
         if current_state == goal:
             break
 
@@ -47,11 +50,10 @@ def astar(
             heapq.heappush(frontier, (f, new_g, child))
             node_info[child] = {"g": new_g, "parent": current_state}
 
-    path = []
     trace = goal
     while trace is not None:
         path.append(trace)
         trace = node_info[trace]["parent"]
 
     path.reverse()
-    return path, nodes_expanded
+    return nodes_expanded, max_depth

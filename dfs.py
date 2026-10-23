@@ -1,12 +1,7 @@
-import sys
-import threading
-import time
-
-
 import helperfn
 
 
-def dfs(
+def dfs_logic(
     state: tuple[int, ...],
     depth: int,
     path: list[tuple[int, ...]],
@@ -17,6 +12,7 @@ def dfs(
 ) -> bool:
 
     if state == goal:
+        visited[state] = depth  # Includeing the goal state in the depth
         path.append(state)
         return True
 
@@ -34,42 +30,8 @@ def dfs(
             if limit is None or visited[child] <= depth + 1:
                 continue
 
-        if dfs(child, depth + 1, path, nodes_expandend, visited, goal, limit):
+        if dfs_logic(child, depth + 1, path, nodes_expandend, visited, goal, limit):
             path.append(state)
             return True
 
     return False
-
-
-def main():
-
-    start = time.perf_counter_ns()
-    grid = [[1, 0, 2], [3, 4, 5], [6, 7, 8]]
-    flatted_grid = [item for row in grid for item in row]
-    visited = {}
-    path = []
-    nodes_expandend = []
-    dfs(tuple(flatted_grid), 0, path, nodes_expandend, visited)
-    for state in reversed(path):
-        for r in range(0, 9, 3):
-            print(
-                *state[r : r + 3]
-            )  # Unpack the elements to print them separated by spaces without brackets
-        print()
-
-    print("moves:", len(path) - 1)
-    print(
-        "nodes:", len(nodes_expandend)
-    )  # Note goal is not appended in nodes_expandend
-    end = time.perf_counter_ns()
-    print(end - start)
-
-
-if __name__ == "__main__":
-    # To prevent the stack overflow.
-    # A second thread is started to operate with 512MB, and the main thread sleeps
-    sys.setrecursionlimit(10**6)
-    threading.stack_size(512 * 1024 * 1024)
-    th = threading.Thread(target=main)
-    th.start()
-    th.join()
