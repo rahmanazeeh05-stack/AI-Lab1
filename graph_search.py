@@ -52,7 +52,7 @@ def astar(
     return {
         "path": path,
         "pathcost": node_info[goal]["g"],
-        "depth": depth, # Max depth is always where i found the goal
+        "depth": depth,  # Max depth is always where i found the goal
         "totaltime": total_time,
         "node_count": node_count,
     }

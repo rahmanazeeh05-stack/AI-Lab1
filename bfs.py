@@ -30,7 +30,7 @@ def bfs(initial_state, goal_state):
             path.reverse()
             return {
                 "depth": depth,
-                "pathcost":depth,
+                "pathcost": depth,
                 "node_count": node_count,
                 "path": path,
                 "totaltime": totaltime,
