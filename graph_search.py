@@ -16,7 +16,13 @@ def dfs(
         dfs_logic(state, 0, path, nodes, visited, goal, None)
 
     sys.setrecursionlimit(200_000)
-    old_size = threading.stack_size(256 * 1024 * 1024)
+    old_size = 0
+    for mb in (256, 128, 64, 32, 16):      # try smaller sizes until one is accepted
+       try:
+         old_size = threading.stack_size(mb * 1024 * 1024)
+         break
+       except ValueError:
+        continue
     start = time.perf_counter()
     try:
         th = threading.Thread(target=worker)
