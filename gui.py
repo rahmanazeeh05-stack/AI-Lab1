@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 from main import algorithms, solve, read_state
+delay = 500
 
 path = []          
 step = 0          
@@ -69,7 +70,7 @@ def auto_step():
     global playing
     if playing and path and step < len(path) - 1:
         next_step()
-        root.after(500, auto_step)
+        root.after(delay, auto_step)
     else:
         playing = False
         play_btn.config(text="Play")
@@ -81,6 +82,10 @@ def toggle_play():
     play_btn.config(text="Pause" if playing else "Play")
     if playing:
         auto_step()
+def toggle_speed():
+    global delay
+    delay = 125 if delay == 500 else 500
+    speed_btn.config(text="4x" if delay == 125 else "1x")
 
 
 # forinput row
@@ -112,7 +117,9 @@ ctrl.pack()
 tk.Button(ctrl, text="< Prev", command=prev_step).grid(row=0, column=0, padx=3)
 play_btn = tk.Button(ctrl, text="Play", width=6, command=toggle_play)
 play_btn.grid(row=0, column=1, padx=3)
-tk.Button(ctrl, text="Next >", command=next_step).grid(row=0, column=2, padx=3)
+speed_btn = tk.Button(ctrl, text="1x", width=4, command=toggle_speed)
+speed_btn.grid(row=0, column=2, padx=3)
+tk.Button(ctrl, text="Next >", command=next_step).grid(row=0, column=3, padx=3)
 
 #statistics
 stats = tk.Label(root, text="", justify="left", font=("Consolas", 10))
