@@ -24,12 +24,12 @@ def astar_logic(
     while frontier:
 
         _, g, current_state = heapq.heappop(frontier)
-        max_depth = max(g, max_depth)
         if (
             g > node_info[current_state]["g"]
         ):  # Take alawys the smaller and ignore the bigger
             # You can compere the f but for the same state the h is constant so the g has all the information about the state
             continue
+        max_depth = max(g, max_depth)
         nodes_expanded += 1
         if current_state == goal:
             break

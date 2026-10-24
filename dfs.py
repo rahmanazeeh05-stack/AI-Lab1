@@ -14,6 +14,7 @@ def dfs_logic(
     if state == goal:
         visited[state] = depth  # Includeing the goal state in the depth
         path.append(state)
+        nodes_expandend.append(state)
         return True
 
     if limit is not None and depth == limit:
