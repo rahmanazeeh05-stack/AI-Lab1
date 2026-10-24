@@ -47,5 +47,5 @@ def bfs(initial_state, goal_state):
         "expanded_nodes": node_count,
         "search_depth": None,
         "path": None,
-        "time": totaltime,
+        "time": time.perf_counter() - start
     }

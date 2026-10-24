@@ -11,7 +11,7 @@ def ids(initial_state, goal):
         visited = {}
         path = []
 
-        found = dfs.dfs(initial_state, 0, path, nodes, visited, goal, limit)
+        found = dfs.dfs_logic(initial_state, 0, path, nodes, visited, goal, limit)
         totalnodes = len(nodes)
         if found:
             path.reverse()
